@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aashirvad Suppliers - Quotation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            margin-bottom: 30px;
+            border-bottom: 4px solid #d4af37;
+            padding-bottom: 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+        }
+
+        .banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 30px;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .banner-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .logo-container {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 3px solid #d4af37;
+            background-color: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .company-info {
+            flex: 1;
+        }
+
+        .company-name {
+            color: #d4af37;
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        .company-tagline {
+            color: #ffffff;
+            font-size: 14px;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            color: #e0e0e0;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .contact-info strong {
+            color: #d4af37;
+        }
+
+        .quotation-title {
+            background-color: #d4af37;
+            color: #1a1a2e;
+            padding: 15px 30px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+        
+        .quotation-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .quotation-info div {
+            flex: 1;
+        }
+        
+        .quotation-info label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .quotation-info input {
+            width: 90%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th {
+            background-color: #333;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .total-cell {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        
+        .summary-table {
+            width: 50%;
+            margin-left: auto;
+            margin-top: 30px;
+        }
+        
+        .summary-table td {
+            padding: 10px;
+        }
+        
+        .summary-table .label {
+            font-weight: bold;
+            text-align: right;
+        }
+        
+        .summary-table .value {
+            text-align: right;
+            background-color: #f9f9f9;
+        }
+        
+        .grand-total {
+            background-color: #333 !important;
+            color: white !important;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .buttons {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        button {
+            padding: 12px 30px;
+            margin: 0 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .add-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .add-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .print-btn {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .print-btn:hover {
+            background-color: #0b7dda;
+        }
+        
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        
+        .delete-btn:hover {
+            background-color: #da190b;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+
+            .buttons {
+                display: none;
+            }
+
+            .delete-btn {
+                display: none;
+            }
+
+            input {
+                border: none;
+                background: transparent;
+            }
+
+            tr:hover {
+                background-color: transparent;
+            }
+
+            .header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .banner {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .quotation-title {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="banner">
+                <div class="banner-left">
+                    <div class="logo-container">
+                        <img src="aashirvad-logo.svg" alt="Aashirvad Suppliers Logo">
+                    </div>
+                    <div class="company-info">
+                        <div class="company-name">AASHIRVAD SUPPLIERS</div>
+                        <div class="company-tagline">Your Trusted Partner in Quality Supplies</div>
+                        <div class="contact-info">
+                            <strong>Address:</strong> Dr No: 1-4/10, Musalayyapalem, SagarNagar, Visakhapatnam-530017<br>
+                            <strong>Phone:</strong> +91 XXXXX XXXXX | <strong>Email:</strong> info@aashirvadsuppliers.com
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="quotation-title">QUOTATION</div>
+        </div>
+
+        <div class="quotation-info">
+            <div>
+                <label>Customer Name:</label>
+                <input type="text" id="customerName" placeholder="Enter customer name">
+            </div>
+            <div>
+                <label>Date:</label>
+                <input type="text" id="quotationDate" placeholder="Enter date">
+            </div>
+            <div>
+                <label>Quotation No:</label>
+                <input type="text" id="quotationNo" placeholder="Enter quotation number">
+            </div>
+        </div>
+
+        <table id="itemsTable">
+            <thead>
+                <tr>
+                    <th style="width: 5%">#</th>
+                    <th style="width: 30%">ITEM</th>
+                    <th style="width: 15%">COST</th>
+                    <th style="width: 15%">QUANTITY</th>
+                    <th style="width: 15%">DAYS</th>
+                    <th style="width: 15%">TOTAL</th>
+                    <th style="width: 5%"></th>
+                </tr>
+            </thead>
+            <tbody id="itemsBody">
+            </tbody>
+        </table>
+
+        <div class="buttons">
+            <button class="add-btn" onclick="addRow()">+ Add Item</button>
+        </div>
+
+        <table class="summary-table">
+            <tr>
+                <td class="label">ITEM COST:</td>
+                <td class="value" id="itemCost">0.00</td>
+            </tr>
+            <tr>
+                <td class="label">TRANSPORT:</td>
+                <td class="value"><input type="number" id="transport" value="0" onchange="calculateGrandTotal()" style="text-align: right;"></td>
+            </tr>
+            <tr>
+                <td class="label">WORKER/SERVICE:</td>
+                <td class="value"><input type="number" id="workerService" value="0" onchange="calculateGrandTotal()" style="text-align: right;"></td>
+            </tr>
+            <tr>
+                <td class="label">OTHER CHARGES:</td>
+                <td class="value"><input type="number" id="otherCharges" value="0" onchange="calculateGrandTotal()" style="text-align: right;"></td>
+            </tr>
+            <tr>
+                <td class="label grand-total">GRAND TOTAL:</td>
+                <td class="value grand-total" id="grandTotal">0.00</td>
+            </tr>
+        </table>
+
+        <div class="buttons">
+            <button class="print-btn" onclick="window.print()">🖨️ Print Quotation</button>
+        </div>
+    </div>
+
+    <script>
+        let rowCounter = 0;
+
+        // Initialize with current date
+        document.getElementById('quotationDate').value = new Date().toLocaleDateString();
+
+        // Load initial items from Excel data
+        const initialItems = [
+            { name: 'ITEM1', cost: 100, quantity: 10, days: 1 },
+            { name: 'ITEM2', cost: 100, quantity: 1, days: 2 },
+            { name: 'ITEM3', cost: 100, quantity: 1, days: 4 },
+            { name: 'ITEM4', cost: 100, quantity: 0, days: 1 },
+            { name: 'ITEM5', cost: 100, quantity: 20, days: 1 },
+            { name: 'ITEM6', cost: 100, quantity: 0, days: 1 },
+            { name: 'ITEM7', cost: 100, quantity: 0, days: 1 },
+            { name: 'ITEM8', cost: 100, quantity: 10, days: 1 },
+            { name: 'ITEM9', cost: 100, quantity: 0, days: 1 },
+            { name: 'ITEM10', cost: 100, quantity: 2, days: 1 },
+            { name: 'ITEM11', cost: 100, quantity: 0, days: 1 },
+            { name: 'ITEM12', cost: 100, quantity: 10, days: 2 },
+            { name: 'ITEM13', cost: 100, quantity: 0, days: 1 },
+            { name: 'ITEM14', cost: 100, quantity: 0, days: 1 },
+            { name: 'ITEM15', cost: 100, quantity: 4, days: 1 },
+            { name: 'ITEM16', cost: 100, quantity: 100, days: 1 },
+            { name: 'ITEM17', cost: 100, quantity: 0, days: 1 },
+            { name: 'ITEM18', cost: 100, quantity: 0, days: 1 }
+        ];
+
+        // Load initial data
+        initialItems.forEach(item => {
+            addRow(item.name, item.cost, item.quantity, item.days);
+        });
+
+        // Set initial miscellaneous costs
+        document.getElementById('transport').value = 200;
+        document.getElementById('workerService').value = 1000;
+
+        calculateGrandTotal();
+
+        function addRow(itemName = '', cost = 0, quantity = 0, days = 1) {
+            rowCounter++;
+            const tbody = document.getElementById('itemsBody');
+            const row = tbody.insertRow();
+            row.id = 'row-' + rowCounter;
+
+            const total = cost * quantity * days;
+
+            row.innerHTML = `
+                <td>${rowCounter}</td>
+                <td><input type="text" value="${itemName}" onchange="calculateGrandTotal()"></td>
+                <td><input type="number" value="${cost}" onchange="calculateRowTotal(${rowCounter})" id="cost-${rowCounter}"></td>
+                <td><input type="number" value="${quantity}" onchange="calculateRowTotal(${rowCounter})" id="quantity-${rowCounter}"></td>
+                <td><input type="number" value="${days}" onchange="calculateRowTotal(${rowCounter})" id="days-${rowCounter}"></td>
+                <td class="total-cell" id="total-${rowCounter}">${total.toFixed(2)}</td>
+                <td><button class="delete-btn" onclick="deleteRow(${rowCounter})">×</button></td>
+            `;
+
+            calculateGrandTotal();
+        }
+
+        function deleteRow(rowId) {
+            const row = document.getElementById('row-' + rowId);
+            row.remove();
+            calculateGrandTotal();
+        }
+
+        function calculateRowTotal(rowId) {
+            const cost = parseFloat(document.getElementById('cost-' + rowId).value) || 0;
+            const quantity = parseFloat(document.getElementById('quantity-' + rowId).value) || 0;
+            const days = parseFloat(document.getElementById('days-' + rowId).value) || 1;
+            const total = cost * quantity * days;
+
+            document.getElementById('total-' + rowId).textContent = total.toFixed(2);
+            calculateGrandTotal();
+        }
+
+        function calculateGrandTotal() {
+            let itemCost = 0;
+            const tbody = document.getElementById('itemsBody');
+            const rows = tbody.getElementsByTagName('tr');
+
+            for (let row of rows) {
+                const totalCell = row.querySelector('.total-cell');
+                if (totalCell) {
+                    itemCost += parseFloat(totalCell.textContent) || 0;
+                }
+            }
+
+            const transport = parseFloat(document.getElementById('transport').value) || 0;
+            const workerService = parseFloat(document.getElementById('workerService').value) || 0;
+            const otherCharges = parseFloat(document.getElementById('otherCharges').value) || 0;
+
+            const grandTotal = itemCost + transport + workerService + otherCharges;
+
+            document.getElementById('itemCost').textContent = itemCost.toFixed(2);
+            document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
+        }
+    </script>
+</body>
+</html>
